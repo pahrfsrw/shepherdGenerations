@@ -78,7 +78,7 @@ public class GameContainer implements Runnable{
 		while(isRunning)
 		{
 			// Breyta í true til að rendera ALLTAF. Þá ætti fps að hækka töluvert (hækkaði í 1100+ þegar leikurinn teiknaði bara auðan skjá).
-			boolean render = false;
+			boolean render = true;
 			
 			firstTime = System.nanoTime()*Utils.NANO;
 			passedTime = firstTime - lastTime;
@@ -106,7 +106,7 @@ public class GameContainer implements Runnable{
 			if(render)
 			{
 				renderer.clear();
-				// game.render(this, r);
+				game.render(this, renderer);
 				window.update();
 				frames++;
 			} 
