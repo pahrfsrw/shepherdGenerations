@@ -11,12 +11,14 @@ import com.pahrfsrw.core.gfx.Image;
 public class Game extends AbstractGame{
 	
 	private Image image = new Image("/smiley.png");
+	
+	float x = 0;
 
 	@Override
 	public void update(GameContainer gc, float dt) {
 		
-		if(Input.isKeyPressed(KeyEvent.VK_UP)){
-			System.out.println("Key up");
+		if(Input.isKey(KeyEvent.VK_UP)){
+			x += dt * 100;
 		}
 		
 		if(Input.isKeyPressed(KeyEvent.VK_DOWN)){
@@ -37,7 +39,7 @@ public class Game extends AbstractGame{
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
 		
-		r.drawImage(image, 50, 50);
+		r.drawImage(image, (int)x, 50);
 	}
 	
 	public static void main(String[] args){

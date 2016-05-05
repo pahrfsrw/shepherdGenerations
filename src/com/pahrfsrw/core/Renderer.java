@@ -1,36 +1,33 @@
 package com.pahrfsrw.core;
 
 import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferInt;
 
-import com.pahrfsrw.core.gfx.Color;
+import com.pahrfsrw.core.gfx.Pixel;
 import com.pahrfsrw.core.gfx.Image;
 
 public class Renderer {
 	
 	private int width, height;
-	private byte[] pixels;
+	private int[] pixels;
 
 	public Renderer(GameContainer gc){
 		width = gc.getWidth();
 		height = gc.getHeight();
-		pixels = ((DataBufferByte)gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
+		pixels = ((DataBufferInt)gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
 	}
 	
-	public void setPixel(int x, int y, Color c) {
-		if(x < 0 || x >= width || y < 0 || y >= height || c.a == 0)
+	public void setPixel(int x, int y, int color) {
+		if(x < 0 || x >= width || y < 0 || y >= height)
 			return;
 		
-		int index = (x+y*width)*4;
-		pixels[index] = (byte)((c.a * 255f) + 0.5f); // 0.5f er til þess að gildin námundist rétt því type casting sker það sem er á bak við kommu bara af.
-		pixels[index+1] = (byte)((c.b * 255f) + 0.5f);
-		pixels[index+2] = (byte)((c.g * 255f) + 0.5f);
-		pixels[index+3] = (byte)((c.r * 255f) + 0.5f);
+		pixels[x+y*width] = color;
 	}
 	
 	public void clear(){
 		for(int x = 0; x < width; x++){
 			for(int y = 0; y < height; y++){
-				setPixel(x, y, Color.BLACK);
+				setPixel(x, y, 0xff000000);
 			}
 		}
 	}
