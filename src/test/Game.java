@@ -37,13 +37,17 @@ public class Game extends AbstractGame{
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
-		// TODO Auto-generated method stub
 		
 		r.drawImage(image, (int)x, 50);
+		
+		//r.drawString("Hey",  0xffffff00, 120, 100);
 	}
 	
 	public static void main(String[] args){
 		GameContainer gc = new GameContainer(new Game());
+		gc.setWidth(320);
+		gc.setHeight(240);
+		gc.setScale(2);
 		gc.start();
 	}
 
