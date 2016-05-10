@@ -7,7 +7,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import com.pahrfsrw.core.ui.ControlPanel;
+import com.pahrfsrw.core.ui.InfoPanel;
+import com.pahrfsrw.core.ui.Toolbar;
 
 public class MainWindow {
 	
@@ -30,7 +36,14 @@ public class MainWindow {
 		
 		frame = new JFrame(gc.getTitle());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new BorderLayout());
+		//frame.setLayout(new BorderLayout());
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
+		
+		//-
+		Toolbar.getInstance().addTo(frame);
+		ControlPanel.getInstance().addTo(frame);
+		//-
+		
 		frame.add(canvas, BorderLayout.CENTER);
 		frame.pack();
 		frame.setLocationRelativeTo(null); // Frame starts in the middle of screen insetead of top left
@@ -40,6 +53,11 @@ public class MainWindow {
 		canvas.createBufferStrategy(1);
 		bs = canvas.getBufferStrategy();
 		g = bs.getDrawGraphics();
+		
+		//-
+		InfoPanel.getInstance().addTo(frame);
+		frame.pack();
+		//-
 	}
 	
 	public void update(){
